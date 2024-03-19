@@ -1,26 +1,83 @@
-// Define First-Class Functions
-// Inline Functions
-// Returning Functions
-// Higher-Order Functions
+// Define "first-class function"
+// Use inline functions
+// Use functions as return values
+// Define "higher-order function"
 
-// Function to demonstrate receiving and calling a callback function
-function receivesAFunction(callback) {
-    // Calling the callback function
+// Exercise routines
+function runFiveMiles() {
+    console.log("Go for a five-mile run");
+  }
+  
+  function liftWeights() {
+    console.log("Pump iron");
+  }
+  
+  function swimFortyLaps() {
+    console.log("Swim 40 laps");
+  }
+  
+  // Exercise routine function accepting a callback
+  function exerciseRoutine(postRunActivity) {
+    runFiveMiles();
+    postRunActivity();
+  }
+  
+  // Routines for different days
+  function Monday() {
+    exerciseRoutine(liftWeights);
+  }
+  
+  function Tuesday() {
+    exerciseRoutine(swimFortyLaps);
+  }
+  
+  function Wednesday() {
+    exerciseRoutine(runFiveMiles);
+  }
+  
+  function Thursday() {
+    exerciseRoutine(liftWeights);
+  }
+  
+  function Friday() {
+    exerciseRoutine(swimFortyLaps);
+  }
+  
+  // Higher-order function returning a function
+  function morningRoutine(exercise) {
+    let breakfast;
+  
+    if (exercise === liftWeights) {
+      breakfast = "protein bar";
+    } else if (exercise === swimFortyLaps) {
+      breakfast = "kale smoothie";
+    } else {
+      breakfast = "granola";
+    }
+  
+    exerciseRoutine(exercise);
+  
+    return function () {
+      console.log(`Nom nom nom, this ${breakfast} is delicious!`);
+    };
+  }
+  
+  // Functions required for the tests
+  function receivesAFunction(callback) {
     callback();
-}
-
-// Function to demonstrate returning a named function
-function returnsANamedFunction() {
-    // Returning a named function
-    return function namedFunction() {
-        console.log("This is a named function!");
-    };
-}
-
-// Function to demonstrate returning an anonymous function
-function returnsAnAnonymousFunction() {
-    // Returning an anonymous function
-    return () => {
-        console.log("This is an anonymous function!");
-    };
-}
+  }
+  
+  function returnsANamedFunction() {
+    return function namedFunction() {};
+  }
+  
+  function returnsAnAnonymousFunction() {
+    return () => {};
+  }
+  
+  module.exports = {
+    receivesAFunction,
+    returnsANamedFunction,
+    returnsAnAnonymousFunction,
+  };
+  
